@@ -3,8 +3,8 @@ by [Sergey Dvodnenko](https://github.com/srg320)
 
 [![Patreon](https://img.shields.io/website?label=patreon&logo=patreon&style=social&url=https%3A%2F%2Fwww.patreon.com%2Fsrg320%2F)](https://www.patreon.com/srg320)
 
-This fork adds composite video: the picture a Mega Drive with a 32X sends to a TV through the 32X's
-AV cable, shown on a modelled NTSC TV. See [Composite video](#composite-video).
+This fork adds composite video: the picture a Mega Drive with a 32X sends through the 32X's AV
+cable, decoded with Kitrinx's composite filters. See [Composite video](#composite-video).
 
 ## Status
 * Most games are playable and run without major issues.
@@ -23,7 +23,7 @@ Region detection is known to work for all commercially released 32X games except
 Based on Kitrinx's NES core implementation, measured against a real 32X with an oscilloscope. The
 32X's BA7237 encoder from the service manual, with its luma filter and colour offset from the
 measurements; sync and colour carrier generated from the core's Genesis with a real console's
-timing; Kitrinx's composite decoder as the TV. Runs in step with the video signal, adding under a
+timing; decoded with Kitrinx's composite filters. Runs in step with the video signal, adding under a
 microsecond of delay. Technical notes: [docs/composite.md](docs/composite.md).
 
 Options, in **Audio & Video** (JP and US regions):

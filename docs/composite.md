@@ -2,8 +2,8 @@
 
 With a 32X attached, the TV is plugged into the 32X. The 32X's BA7237 encoder takes the Mega Drive's
 RGB and the 32X's RGB, picks one of them for each pixel, and encodes the result. The Mega Drive's own
-composite output is not used. The model follows that chain, then shows the result on a TV, as
-Kitrinx's NES core does.
+composite output is not used. The model follows that chain, then decodes the result with Kitrinx's
+composite filters, as Kitrinx's NES core does.
 
 ## What is modelled
 
@@ -23,7 +23,7 @@ Kitrinx's NES core does.
      0.53.
    * The colours sit 7.6° behind where the burst puts them. This is the colour oscillator's lock
      error and will vary a little from unit to unit.
-4. **TV**: Kitrinx's composite decoder from the NES core (MIT licence), with the changes a Mega Drive
+4. **Composite filters**: Kitrinx's composite decoder from the NES core (MIT licence), with the changes a Mega Drive
    needs. The burst gate is timed from the end of sync, and the Premium TV comb uses a
    set's fixed 227.5-cycle delay because the lines are 228 cycles. The sync separator averages over
    one colour cycle before slicing. Without that averaging, the 32X's saturated colours (100% red
