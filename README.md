@@ -20,11 +20,10 @@ Region detection is known to work for all commercially released 32X games except
 * FIFA Soccer 96 (Europe) and Mortal Kombat II (Europe) boot to US/JP Region. Header has the "JUE" (Region-Free) region code, so just set your region priority.
 
 ## Composite video
-It is made the way Kitrinx's NES core does it, from the real signal chain. Sync and colour carrier
-are made from the core's Genesis as a real console times them. The 32X's own BA7237 encoder is
-modelled from the 32X service manual, since the TV is plugged into the 32X. Then the picture goes
-to a TV (Kitrinx's composite decoder). The 32X's luma filter and colour offset were measured with
-an oscilloscope on a real 32X. Technical notes: [docs/composite.md](docs/composite.md).
+Based on Kitrinx's NES core implementation, measured against a real 32X with an oscilloscope. The
+32X's BA7237 encoder from the service manual, with its luma filter and colour offset from the
+measurements; sync and colour carrier generated from the core's Genesis with a real console's timing;
+Kitrinx's composite decoder as the TV. Technical notes: [docs/composite.md](docs/composite.md).
 
 Options, in **Audio & Video** (JP and US regions):
 
