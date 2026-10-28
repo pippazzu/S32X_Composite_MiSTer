@@ -22,8 +22,9 @@ Region detection is known to work for all commercially released 32X games except
 ## Composite video
 Based on Kitrinx's NES core implementation, measured against a real 32X with an oscilloscope. The
 32X's BA7237 encoder from the service manual, with its luma filter and colour offset from the
-measurements; sync and colour carrier generated from the core's Genesis with a real console's timing;
-Kitrinx's composite decoder as the TV. Technical notes: [docs/composite.md](docs/composite.md).
+measurements; sync and colour carrier generated from the core's Genesis with a real console's
+timing; Kitrinx's composite decoder as the TV. Runs in step with the video signal, adding under a
+microsecond of delay. Technical notes: [docs/composite.md](docs/composite.md).
 
 Options, in **Audio & Video** (JP and US regions):
 
@@ -33,8 +34,7 @@ Options, in **Audio & Video** (JP and US regions):
   black) / More / Much More / Too Much.
 * **Comp. Sharpness**: Off / Low / Medium / High (the TV's sharpness knob).
 
-No frame buffer: the added delay is under a microsecond. Composite Blend is removed (the composite
-path does that blending itself). The scandoubler, HQ2x and scanline effects are kept, but are hidden
-while composite is on.
+Composite Blend is removed (the composite path does that blending itself). The scandoubler, HQ2x and
+scanline effects are kept, but are hidden while composite is on.
 
 Try first: Sega's "Mars Check Program" (the 32X factory test cartridge).
