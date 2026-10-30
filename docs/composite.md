@@ -36,7 +36,13 @@ One console, not a survey.
 3. **Board filters**: the measured luma low-pass and the service manual's chroma network.
 4. **Composite filters**: Kitrinx's composite decoder from the NES core, run at 15 samples per
    subcarrier cycle, with the changes listed below. Its contrast input is fixed at what a set's
-   sync AGC gives for this console's sync level.
+   sync AGC gives for this console's sync level. One output pixel every two samples: 26.85 MHz,
+   1710 a line, so the scaler has 7.5 samples per subcarrier cycle to draw the decoded picture
+   with (one in four left it 3.75).
+5. **Gamma**: the decoded pixels come every two clocks, too fast for the gamma block inside
+   `video_mixer`, which looks R, G and B up one after another and needs four clocks per pixel.
+   The core uses the framework's `gamma_fast` instead, in front of the mixer on both paths, which
+   looks the three up at once from the same curve with the same one-pixel delay.
 
 Not implemented: interlaced sync, PAL.
 
@@ -73,5 +79,5 @@ With a 4.7 µs sync and standard NTSC timing, the decoder gives the same picture
 
 ## Build
 
-Quartus 17.0.2 Lite, seed 3. Logic 69%, DSP blocks 96/112, RAM blocks 545/553 (99%). Worst setup
-slack is +0.614 ns and hold slack +0.249 ns, so timing passes.
+Quartus 17.0.2 Lite, seed 3. Logic 69%, DSP blocks 96/112, RAM blocks 547/553 (99%). Worst setup
+slack is +0.271 ns and hold slack +0.246 ns, so timing passes.
