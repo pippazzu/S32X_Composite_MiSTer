@@ -28,11 +28,11 @@ microsecond of delay. Technical notes: [docs/composite.md](docs/composite.md).
 
 Options, in **Audio & Video** (JP and US regions):
 
-* **Composite Filter**: Off / Budget TV (notch filter, softer colour) / Premium TV (comb filter,
-  sharper colour).
+* **Composite Filter**: Budget TV (default: notch filter, softer colour) / Premium TV (comb filter,
+  sharper colour) / Off.
 * **Comp. Brightness**: Japan (the console's own black) / USA (a US set: the darkest shades crush to
   black) / More / Much More / Too Much.
-* **Comp. Sharpness**: Off / Low / Medium / High (the TV's sharpness knob).
+* **Comp. Sharpness**: Medium (default) / High / Off / Low (the TV's sharpness knob).
 
 Composite Blend is removed (the composite path does that blending itself). The scandoubler, HQ2x and
 scanline effects are kept, but are hidden while composite is on.

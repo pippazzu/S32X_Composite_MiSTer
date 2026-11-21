@@ -130,9 +130,9 @@ localparam CONF_STR = {
 	"P1-;",
 	"H6P1OT,Border,No,Yes;",
 	"P1-;",
-	"H7P1oOP,Composite Filter,Off,Budget TV,Premium TV;",
+	"H7P1oOP,Composite Filter,Budget TV,Premium TV,Off;",
 	"h6P1oQS,Comp. Brightness,Japan,USA,More,Much More,Too Much;",
-	"h6P1oTU,Comp. Sharpness,Off,Low,Medium,High;",
+	"h6P1oTU,Comp. Sharpness,Medium,High,Off,Low;",
 	"P1-;",
 	"P1OEF,Audio Filter,Model 1,Model 2,Minimal,No Filter;",
 	"P1OB,FM Chip,YM2612,YM3438;",
@@ -206,7 +206,13 @@ wire [15:0] sdram_sz;
 // decoded by a modelled TV. NTSC only: the decoder is an NTSC set.
 // Budget TV: notch separation and a narrow chroma band. Premium TV: adaptive
 // comb and a wider chroma band.
-wire [1:0] composite_set = status[57:56];
+// Defaults (status 0): Budget TV and Medium sharpness. The menu lists the
+// default first; these map menu entries back to the filter settings.
+// Filter menu: 0 Budget TV, 1 Premium TV, 2 Off -> 1, 2, 0.
+wire [1:0] composite_set = status[57:56] == 2'd0 ? 2'd1 :
+                           status[57:56] == 2'd1 ? 2'd2 : 2'd0;
+// Sharpness menu: 0 Medium, 1 High, 2 Off, 3 Low -> 2, 3, 0, 1.
+wire [1:0] comp_sharpness = status[62:61] ^ 2'd2;
 wire       use_composite = (composite_set != 2'd0) && !PAL;
 wire       composite_premium = (composite_set == 2'd2);
 
@@ -1009,7 +1015,7 @@ composite_decoder #(.SPC(15), .HCNT_W(12), .LUMA_LP(8), .PK_SPAN(9), .PIX_DIV(2)
 	.sat(8'd128),
 	.hue(8'd0),
 	.chroma_trail(composite_premium ? 4'd2 : 4'd3),
-	.sharpness({status[62:61], 2'b00}),
+	.sharpness({comp_sharpness, 2'b00}),
 	.black_stretch(2'd0),
 	.brightness(comp_brightness),
 	.contrast(16'd2720),
